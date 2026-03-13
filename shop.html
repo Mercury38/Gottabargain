@@ -27,6 +27,11 @@
       margin-bottom: 8px;
     }
 
+    header p {
+      color: #ddd;
+      font-size: 18px;
+    }
+
     nav {
       position: sticky;
       top: 0;
@@ -49,10 +54,19 @@
       display: inline-block;
     }
 
+    .top-banner {
+      background: #fff3cd;
+      color: #7a5a00;
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      border-bottom: 1px solid #f0df9b;
+    }
+
     .section {
-      max-width: 1200px;
+      max-width: 1220px;
       margin: auto;
-      padding: 44px 20px;
+      padding: 42px 20px;
     }
 
     .section h2 {
@@ -65,16 +79,40 @@
       text-align: center;
       color: #666;
       max-width: 800px;
-      margin: 0 auto 30px;
+      margin: 0 auto 28px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .toolbar input,
+    .toolbar select,
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d6d6d6;
+      border-radius: 10px;
+      font-size: 14px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
       gap: 20px;
     }
 
-    .card, .admin-box {
+    .card, .admin-box, .contact-box, .summary-box {
       background: white;
       border-radius: 14px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
@@ -163,7 +201,7 @@
       margin-top: 12px;
     }
 
-    .buy-btn, .reserve-btn, .small-btn, .danger-btn {
+    .buy-btn, .reserve-btn, .small-btn, .danger-btn, .neutral-btn {
       border: none;
       padding: 12px;
       border-radius: 10px;
@@ -192,6 +230,11 @@
       color: white;
     }
 
+    .neutral-btn {
+      background: #eceff1;
+      color: #222;
+    }
+
     .basket-toggle {
       position: fixed;
       right: 20px;
@@ -211,7 +254,7 @@
       position: fixed;
       top: 0;
       right: -420px;
-      width: 380px;
+      width: 390px;
       max-width: 100%;
       height: 100%;
       background: white;
@@ -280,9 +323,15 @@
       display: block;
     }
 
+    .admin-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+
     .admin-box {
       padding: 24px;
-      margin-top: 20px;
     }
 
     .admin-box h3 {
@@ -299,19 +348,6 @@
 
     .full-width {
       grid-column: 1 / -1;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d6d6d6;
-      border-radius: 10px;
-      font-size: 14px;
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
     }
 
     .checkbox-row {
@@ -341,6 +377,70 @@
       color: #0a7b34;
     }
 
+    .manage-row {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .manage-row:last-child {
+      border-bottom: none;
+    }
+
+    .manage-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .manage-meta {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .mini-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 28px;
+    }
+
+    .summary-box {
+      padding: 22px;
+      text-align: center;
+    }
+
+    .summary-box h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .summary-box strong {
+      font-size: 28px;
+      color: #00a884;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .contact-box {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .contact-box h4 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
     footer {
       background: #111;
       color: white;
@@ -354,11 +454,20 @@
       margin: 6px 0;
     }
 
+    @media (max-width: 900px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       header h1 { font-size: 32px; }
       nav a, nav button { margin: 6px 8px; font-size: 14px; }
       .button-row { grid-template-columns: 1fr; }
       .basket-drawer { width: 100%; }
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -373,13 +482,52 @@
     <a href="index.html">Home</a>
     <a href="#shop">Shop</a>
     <a href="#mystery">Mystery Boxes</a>
-    <a href="#adminSection" onclick="showAdminLogin(); return false;">Admin</a>
+    <a href="#contact">Contact</a>
     <button onclick="showAdminLogin()">Admin Login</button>
   </nav>
+
+  <div class="top-banner">
+    🚧 Shop is live and being updated regularly with new bargains and products 🚧
+  </div>
+
+  <section class="section">
+    <div class="summary-grid">
+      <div class="summary-box">
+        <h4>Products</h4>
+        <strong id="summaryProducts">0</strong>
+      </div>
+      <div class="summary-box">
+        <h4>Mystery Boxes</h4>
+        <strong id="summaryMystery">0</strong>
+      </div>
+      <div class="summary-box">
+        <h4>Basket Items</h4>
+        <strong id="summaryBasket">0</strong>
+      </div>
+      <div class="summary-box">
+        <h4>Special Offers</h4>
+        <strong id="summaryOffers">0</strong>
+      </div>
+    </div>
+  </section>
 
   <section class="section" id="shop">
     <h2>Shop Products</h2>
     <p class="subtext">Add items to basket, reserve products with a deposit, and manage your shop from the admin panel.</p>
+
+    <div class="toolbar">
+      <input id="searchBox" type="text" placeholder="Search products..." oninput="renderProducts()" />
+      <select id="categoryFilter" onchange="renderProducts()">
+        <option value="all">All Categories</option>
+        <option value="Toys">Toys</option>
+        <option value="Electronics">Electronics</option>
+        <option value="DJ / Electronics">DJ / Electronics</option>
+        <option value="Mystery Box">Mystery Box</option>
+        <option value="Gifts">Gifts</option>
+        <option value="Home">Home</option>
+      </select>
+    </div>
+
     <div class="products" id="productGrid"></div>
   </section>
 
@@ -390,36 +538,59 @@
   </section>
 
   <section class="section admin-panel" id="adminSection">
-    <div class="admin-box">
-      <h3>Add or Edit Product</h3>
+    <h2>Admin Panel</h2>
+    <p class="subtext">Add, edit and delete products without changing code again.</p>
 
-      <div class="form-grid">
-        <input id="productName" placeholder="Product name" />
-        <input id="productCategory" placeholder="Category" />
-        <input id="productPrice" placeholder="Price e.g. 19.99" />
-        <input id="productOldPrice" placeholder="Old price e.g. 29.99" />
-        <input id="productImage" class="full-width" placeholder="Image URL" />
-        <textarea id="productDescription" class="full-width" placeholder="Description"></textarea>
+    <div class="admin-grid">
+      <div class="admin-box">
+        <h3>Add or Edit Product</h3>
+
+        <div class="form-grid">
+          <input id="productName" placeholder="Product name" />
+          <input id="productCategory" placeholder="Category" />
+          <input id="productPrice" placeholder="Price e.g. 19.99" />
+          <input id="productOldPrice" placeholder="Old price e.g. 29.99" />
+          <input id="productImage" class="full-width" placeholder="Image URL" />
+          <textarea id="productDescription" class="full-width" placeholder="Description"></textarea>
+        </div>
+
+        <div class="checkbox-row">
+          <label><input type="checkbox" id="productSale" /> Sale item</label>
+          <label><input type="checkbox" id="productGift" /> Free gift included</label>
+          <label><input type="checkbox" id="productStock" /> Low stock warning</label>
+          <label><input type="checkbox" id="productMystery" /> Mystery box</label>
+        </div>
+
+        <div class="admin-actions">
+          <button class="small-btn" onclick="saveProduct()">Save Product</button>
+          <button class="reserve-btn" onclick="resetForm()">Clear Form</button>
+        </div>
+
+        <div class="message" id="adminMessage"></div>
       </div>
 
-      <div class="checkbox-row">
-        <label><input type="checkbox" id="productSale" /> Sale item</label>
-        <label><input type="checkbox" id="productGift" /> Free gift included</label>
-        <label><input type="checkbox" id="productStock" /> Low stock warning</label>
-        <label><input type="checkbox" id="productMystery" /> Mystery box</label>
+      <div class="admin-box">
+        <h3>Manage Products</h3>
+        <div id="adminProductList"></div>
       </div>
-
-      <div class="admin-actions">
-        <button class="small-btn" onclick="saveProduct()">Save Product</button>
-        <button class="reserve-btn" onclick="resetForm()">Clear Form</button>
-      </div>
-
-      <div class="message" id="adminMessage"></div>
     </div>
+  </section>
 
-    <div class="admin-box">
-      <h3>Manage Products</h3>
-      <div id="adminProductList"></div>
+  <section class="section" id="contact">
+    <h2>Contact Gottabargain</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h4>Email</h4>
+        <p id="contactEmail">hello@gottabargain.co.uk</p>
+      </div>
+      <div class="contact-box">
+        <h4>Phone</h4>
+        <p id="contactPhone">07400 000000</p>
+      </div>
+      <div class="contact-box">
+        <h4>Collection</h4>
+        <p id="contactCollection">Reserve items and collect locally</p>
+      </div>
     </div>
   </section>
 
@@ -443,6 +614,7 @@
       <div style="margin-top:12px; display:grid; gap:10px;">
         <button class="buy-btn" onclick="fakeCheckout()">Checkout</button>
         <button class="reserve-btn" onclick="reserveBasket()">Reserve with Deposit</button>
+        <button class="neutral-btn" onclick="clearBasket()">Clear Basket</button>
       </div>
     </div>
   </div>
@@ -545,16 +717,41 @@
       return Number(value).toFixed(2);
     }
 
+    function updateSummary() {
+      const normalProducts = products.filter(p => !p.mystery).length;
+      const mysteryProducts = products.filter(p => p.mystery).length;
+      const basketItems = basket.reduce((sum, item) => sum + item.qty, 0);
+      const offers = products.filter(p => p.sale || p.freeGift).length;
+
+      document.getElementById("summaryProducts").textContent = normalProducts;
+      document.getElementById("summaryMystery").textContent = mysteryProducts;
+      document.getElementById("summaryBasket").textContent = basketItems;
+      document.getElementById("summaryOffers").textContent = offers;
+    }
+
     function renderProducts() {
       const productGrid = document.getElementById("productGrid");
       const mysteryGrid = document.getElementById("mysteryGrid");
+      const searchTerm = document.getElementById("searchBox").value.toLowerCase().trim();
+      const categoryFilter = document.getElementById("categoryFilter").value;
 
       productGrid.innerHTML = "";
       mysteryGrid.innerHTML = "";
 
-      products.forEach(product => {
-        const card = createProductCard(product);
+      const filteredProducts = products.filter(product => {
+        const matchesSearch =
+          product.name.toLowerCase().includes(searchTerm) ||
+          product.category.toLowerCase().includes(searchTerm) ||
+          product.description.toLowerCase().includes(searchTerm);
 
+        const matchesCategory =
+          categoryFilter === "all" || product.category === categoryFilter;
+
+        return matchesSearch && matchesCategory;
+      });
+
+      filteredProducts.forEach(product => {
+        const card = createProductCard(product);
         if (product.mystery) {
           mysteryGrid.appendChild(card);
         } else {
@@ -563,6 +760,7 @@
       });
 
       renderAdminList();
+      updateSummary();
     }
 
     function createProductCard(product) {
@@ -609,6 +807,7 @@
 
       saveBasketToStorage();
       renderBasket();
+      updateSummary();
       document.getElementById("basketDrawer").classList.add("open");
     }
 
@@ -656,12 +855,21 @@
 
       saveBasketToStorage();
       renderBasket();
+      updateSummary();
     }
 
     function removeFromBasket(id) {
       basket = basket.filter(item => item.id !== id);
       saveBasketToStorage();
       renderBasket();
+      updateSummary();
+    }
+
+    function clearBasket() {
+      basket = [];
+      saveBasketToStorage();
+      renderBasket();
+      updateSummary();
     }
 
     function toggleBasket() {
@@ -793,12 +1001,11 @@
 
       products.forEach(product => {
         const row = document.createElement("div");
-        row.style.padding = "12px 0";
-        row.style.borderBottom = "1px solid #eee";
+        row.className = "manage-row";
         row.innerHTML = `
-          <strong>${product.name}</strong><br>
-          <span class="muted">${product.category} - £${money(product.price)}</span>
-          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+          <div class="manage-title">${product.name}</div>
+          <div class="manage-meta">${product.category} - £${money(product.price)}</div>
+          <div class="mini-actions">
             <button class="small-btn" onclick="editProduct(${product.id})">Edit</button>
             <button class="danger-btn" onclick="deleteProduct(${product.id})">Delete</button>
           </div>
@@ -809,6 +1016,7 @@
 
     renderProducts();
     renderBasket();
+    updateSummary();
   </script>
 </body>
 </html>
