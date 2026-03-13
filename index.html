@@ -5,27 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gottabargain</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      background: #f4f6f8;
       color: #222;
       line-height: 1.4;
     }
 
+    a { text-decoration: none; }
+
     header {
-      background: linear-gradient(90deg, #111, #1f1f1f);
+      background: linear-gradient(90deg, #111, #1e1e1e);
       color: white;
-      padding: 20px;
+      padding: 22px 16px;
       text-align: center;
     }
 
@@ -36,26 +30,28 @@
     }
 
     header p {
-      font-size: 18px;
       color: #ddd;
+      font-size: 18px;
     }
 
     nav {
-      background: #00ffd0;
-      padding: 12px;
-      text-align: center;
       position: sticky;
       top: 0;
       z-index: 1000;
+      background: #00ffd0;
+      padding: 12px 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
-    nav a {
+    nav a, nav button {
       color: #111;
-      text-decoration: none;
-      margin: 0 15px;
+      background: none;
+      border: none;
+      margin: 6px 12px;
+      font-size: 15px;
       font-weight: bold;
-      font-size: 16px;
-      display: inline-block;
+      cursor: pointer;
     }
 
     .hero {
@@ -73,30 +69,34 @@
     }
 
     .hero p {
+      max-width: 780px;
+      margin: 0 auto 24px;
       font-size: 20px;
-      margin-bottom: 25px;
     }
 
     .hero-buttons {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    .hero button {
-      background: #00ffd0;
-      color: #111;
+    .hero-buttons button {
       border: none;
-      padding: 14px 24px;
+      border-radius: 10px;
+      padding: 14px 22px;
       font-size: 16px;
       font-weight: bold;
-      border-radius: 8px;
       cursor: pointer;
     }
 
-    .hero .secondary-btn {
-      background: white;
+    .btn-primary {
+      background: #00ffd0;
+      color: #111;
+    }
+
+    .btn-secondary {
+      background: #fff;
       color: #111;
     }
 
@@ -104,28 +104,52 @@
       background: #fff3cd;
       color: #7a5a00;
       text-align: center;
-      padding: 15px;
+      padding: 14px;
       font-weight: bold;
       border-top: 1px solid #f0df9b;
       border-bottom: 1px solid #f0df9b;
     }
 
     .section {
-      padding: 40px 20px;
       max-width: 1200px;
       margin: auto;
+      padding: 44px 20px;
     }
 
     .section h3 {
       text-align: center;
       font-size: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
-    .products,
-    .features,
-    .categories,
-    .contact-grid {
+    .subtext {
+      text-align: center;
+      color: #666;
+      max-width: 800px;
+      margin: -12px auto 30px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .products, .features, .categories, .contact-grid {
       display: grid;
       gap: 20px;
     }
@@ -139,24 +163,21 @@
     }
 
     .categories {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
     .contact-grid {
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .card,
-    .feature-box,
-    .category-box,
-    .contact-box {
+    .card, .feature-box, .category-box, .contact-box, .admin-box, .basket-box {
       background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
 
     .card {
+      overflow: hidden;
       transition: transform 0.2s ease;
     }
 
@@ -169,6 +190,7 @@
       height: 220px;
       object-fit: cover;
       display: block;
+      background: #eee;
     }
 
     .card-content {
@@ -180,60 +202,70 @@
       margin-bottom: 8px;
     }
 
+    .product-type {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
     .price {
       font-size: 22px;
-      font-weight: bold;
       color: #00a884;
+      font-weight: bold;
       margin-bottom: 10px;
     }
 
     .old-price {
-      text-decoration: line-through;
       color: #999;
-      font-size: 15px;
+      text-decoration: line-through;
+      font-size: 14px;
       margin-left: 8px;
+      font-weight: normal;
     }
 
     .card p {
-      font-size: 15px;
-      margin-bottom: 14px;
       color: #555;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .gift-note, .stock-note, .sale-note {
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     .gift-note {
-      background: #ecfff9;
-      color: #00805f;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-size: 14px;
-      font-weight: bold;
+      background: #ebfff8;
+      color: #007b5d;
     }
 
     .stock-note {
       background: #fff4e5;
       color: #9a5a00;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-size: 14px;
-      font-weight: bold;
+    }
+
+    .sale-note {
+      background: #ffe9ee;
+      color: #c90036;
     }
 
     .button-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
+      margin-top: 12px;
     }
 
-    .card button,
-    .category-box button {
+    .buy-btn, .reserve-btn, .small-btn, .danger-btn {
       border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      width: 100%;
       font-weight: bold;
+      width: 100%;
     }
 
     .buy-btn {
@@ -246,54 +278,194 @@
       color: #111;
     }
 
-    .feature-box,
-    .category-box,
-    .contact-box {
-      padding: 25px;
+    .small-btn {
+      background: #1c7ed6;
+      color: white;
+    }
+
+    .danger-btn {
+      background: #e03131;
+      color: white;
+    }
+
+    .feature-box, .category-box, .contact-box, .admin-box {
+      padding: 24px;
       text-align: center;
     }
 
-    .feature-box h4,
-    .category-box h4,
-    .contact-box h4 {
+    .feature-box h4, .category-box h4, .contact-box h4 {
       margin-bottom: 10px;
       font-size: 20px;
+    }
+
+    .admin-panel {
+      display: none;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-box {
+      text-align: left;
+    }
+
+    .admin-box h4 {
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 12px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d6d6d6;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .checkbox-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 10px 0 16px;
+    }
+
+    .checkbox-row label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .basket-toggle {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1001;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .basket-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      max-width: 100%;
+      height: 100%;
+      background: white;
+      box-shadow: -4px 0 18px rgba(0,0,0,0.16);
+      z-index: 2000;
+      transition: right 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .basket-drawer.open {
+      right: 0;
+    }
+
+    .basket-header {
+      background: #111;
+      color: white;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .basket-body {
+      padding: 18px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .basket-item {
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+
+    .basket-item:last-child {
+      border-bottom: none;
+    }
+
+    .basket-item-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .basket-footer {
+      padding: 18px;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+    }
+
+    .basket-total {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .muted {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #0a7b34;
     }
 
     footer {
       background: #111;
       color: white;
       text-align: center;
-      padding: 25px 20px;
+      padding: 28px 20px;
       margin-top: 40px;
     }
 
     footer p {
-      margin: 6px 0;
       color: #ccc;
+      margin: 6px 0;
     }
 
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 34px;
-      }
-
-      .hero h2 {
-        font-size: 30px;
-      }
-
-      .hero p {
-        font-size: 17px;
-      }
-
-      nav a {
-        margin: 8px 10px;
-        font-size: 14px;
-      }
-
-      .button-row {
-        grid-template-columns: 1fr;
-      }
+      header h1 { font-size: 34px; }
+      .hero h2 { font-size: 30px; }
+      .hero p { font-size: 17px; }
+      nav a, nav button { margin: 6px 8px; font-size: 14px; }
+      .button-row { grid-template-columns: 1fr; }
+      .basket-drawer { width: 100%; }
     }
   </style>
 </head>
@@ -310,14 +482,34 @@
     <a href="#mystery">Mystery Boxes</a>
     <a href="#offers">Special Offers</a>
     <a href="#contact">Contact</a>
+    <button onclick="showAdminLogin()">Admin</button>
   </nav>
 
   <section class="hero">
     <h2>Welcome to Gottabargain</h2>
-    <p>Find amazing bargains, mystery boxes, gifts and special deals</p>
+    <p>Find amazing bargains, mystery boxes, gifts, special offers, and reserve selected items with a deposit.</p>
     <div class="hero-buttons">
-      <button onclick="document.getElementById('shop').scrollIntoView();">Shop Now</button>
-      <button class="secondary-btn" onclick="document.getElementById('mystery').scrollIntoView();">View Mystery Boxes</button>
+      <button class="btn-primary" onclick="window.location.href='#shop';">Shop Now</button>
+      <button class="btn-secondary" onclick="window.location.href='#mystery';">View Mystery Boxes</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <strong>Low Prices</strong>
+        Great deals across toys, gifts, gadgets and more
+      </div>
+      <div class="stat-box">
+        <strong>Mystery Boxes</strong>
+        Surprise bundles with value packed inside
+      </div>
+      <div class="stat-box">
+        <strong>Free Gifts</strong>
+        Selected items unlock bonus extras
+      </div>
+      <div class="stat-box">
+        <strong>Reserve Items</strong>
+        Hold items with a deposit before full payment
+      </div>
     </div>
   </section>
 
@@ -327,61 +519,8 @@
 
   <section class="section" id="shop">
     <h3>Featured Bargains</h3>
-    <div class="products">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80" alt="DJ Headphones">
-        <div class="card-content">
-          <h4>Retro DJ Headphones</h4>
-          <div class="price">£19.99 <span class="old-price">£29.99</span></div>
-          <div class="gift-note">FREE gift included: Mini craft set</div>
-          <p>Brilliant sound and a great bargain for music lovers and DJs.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve with Deposit</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80" alt="Toy Bundle">
-        <div class="card-content">
-          <h4>Kids Surprise Toy Bundle</h4>
-          <div class="price">£14.99</div>
-          <p>A fun toy bundle packed with value and surprises for children.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve with Deposit</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80" alt="Mystery Box">
-        <div class="card-content">
-          <h4>Mystery Bargain Box</h4>
-          <div class="price">£20.00</div>
-          <div class="stock-note">Popular item - limited quantity</div>
-          <p>A surprise box full of bargain goodies with amazing value inside.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve with Deposit</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80" alt="Bluetooth Speaker">
-        <div class="card-content">
-          <h4>Bluetooth Speaker Bargain</h4>
-          <div class="price">£24.99</div>
-          <p>Portable speaker with strong sound, perfect for home or garden.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve with Deposit</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="subtext">Browse our current bargains, gift items, toys, gadgets and special picks.</p>
+    <div class="products" id="productGrid"></div>
   </section>
 
   <section class="section">
@@ -390,69 +529,30 @@
       <div class="category-box">
         <h4>Toys</h4>
         <p>Fun bargain toys and bundles for children.</p>
-        <button class="reserve-btn">View Category</button>
+        <button class="reserve-btn" onclick="window.location.href='#shop';">View Category</button>
       </div>
       <div class="category-box">
         <h4>Home Bargains</h4>
         <p>Useful everyday products at bargain prices.</p>
-        <button class="reserve-btn">View Category</button>
+        <button class="reserve-btn" onclick="window.location.href='#shop';">View Category</button>
       </div>
       <div class="category-box">
         <h4>Gifts</h4>
         <p>Budget-friendly gift ideas and surprise buys.</p>
-        <button class="reserve-btn">View Category</button>
+        <button class="reserve-btn" onclick="window.location.href='#shop';">View Category</button>
       </div>
       <div class="category-box">
         <h4>Special Offers</h4>
         <p>Sale items, free gift deals and limited offers.</p>
-        <button class="reserve-btn">View Category</button>
+        <button class="reserve-btn" onclick="window.location.href='#offers';">View Offers</button>
       </div>
     </div>
   </section>
 
   <section class="section" id="mystery">
     <h3>Mystery Boxes</h3>
-    <div class="products">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="£10 Mystery Box">
-        <div class="card-content">
-          <h4>£10 Mystery Box</h4>
-          <div class="price">£10.00</div>
-          <p>A fun low-cost mystery box packed with surprise value.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80" alt="£20 Mystery Box">
-        <div class="card-content">
-          <h4>£20 Mystery Box</h4>
-          <div class="price">£20.00</div>
-          <p>Our most popular mystery box with even better value inside.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=900&q=80" alt="£50 Premium Mystery Box">
-        <div class="card-content">
-          <h4>£50 Premium Mystery Box</h4>
-          <div class="price">£50.00</div>
-          <div class="gift-note">Bonus gift included</div>
-          <p>Premium mystery box with larger value items and bonus extras.</p>
-          <div class="button-row">
-            <button class="buy-btn">Add to Basket</button>
-            <button class="reserve-btn">Reserve</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="subtext">Choose a surprise bundle and enjoy the fun of not knowing exactly what is inside.</p>
+    <div class="products" id="mysteryGrid"></div>
   </section>
 
   <section class="section" id="offers">
@@ -474,6 +574,41 @@
         <h4>Reserve with Deposit</h4>
         <p>Let customers reserve selected items before full payment.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section admin-panel" id="adminSection">
+    <h3>Admin Panel</h3>
+    <div class="admin-box">
+      <h4>Add or Edit Product</h4>
+
+      <div class="form-grid">
+        <input id="productName" placeholder="Product name" />
+        <input id="productCategory" placeholder="Category" />
+        <input id="productPrice" placeholder="Price e.g. 19.99" />
+        <input id="productOldPrice" placeholder="Old price e.g. 29.99" />
+        <input id="productImage" class="full-width" placeholder="Image URL" />
+        <textarea id="productDescription" class="full-width" placeholder="Description"></textarea>
+      </div>
+
+      <div class="checkbox-row">
+        <label><input type="checkbox" id="productSale" /> Sale item</label>
+        <label><input type="checkbox" id="productGift" /> Free gift included</label>
+        <label><input type="checkbox" id="productStock" /> Low stock warning</label>
+        <label><input type="checkbox" id="productMystery" /> Mystery box</label>
+      </div>
+
+      <div class="admin-actions">
+        <button class="small-btn" onclick="saveProduct()">Save Product</button>
+        <button class="reserve-btn" onclick="resetForm()">Clear Form</button>
+      </div>
+
+      <div class="message" id="adminMessage"></div>
+    </div>
+
+    <div class="admin-box" style="margin-top: 20px;">
+      <h4>Manage Products</h4>
+      <div id="adminProductList"></div>
     </div>
   </section>
 
@@ -501,5 +636,386 @@
     <p>More products coming soon</p>
   </footer>
 
+  <button class="basket-toggle" onclick="toggleBasket()">Basket (<span id="basketCount">0</span>)</button>
+
+  <div class="basket-drawer" id="basketDrawer">
+    <div class="basket-header">
+      <strong>Your Basket</strong>
+      <button onclick="toggleBasket()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;">✕</button>
+    </div>
+    <div class="basket-body" id="basketItems"></div>
+    <div class="basket-footer">
+      <div class="basket-total">Total: £<span id="basketTotal">0.00</span></div>
+      <p class="muted">Deposit reservations and full checkout buttons can be connected later.</p>
+      <div style="margin-top:12px; display:grid; gap:10px;">
+        <button class="buy-btn" onclick="fakeCheckout()">Checkout</button>
+        <button class="reserve-btn" onclick="reserveBasket()">Reserve with Deposit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultProducts = [
+      {
+        id: 1,
+        name: "Retro DJ Headphones",
+        category: "DJ / Electronics",
+        price: 19.99,
+        oldPrice: 29.99,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
+        description: "Brilliant sound and a great bargain for music lovers and DJs.",
+        sale: true,
+        freeGift: true,
+        lowStock: false,
+        mystery: false
+      },
+      {
+        id: 2,
+        name: "Kids Surprise Toy Bundle",
+        category: "Toys",
+        price: 14.99,
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80",
+        description: "A fun toy bundle packed with value and surprises for children.",
+        sale: false,
+        freeGift: false,
+        lowStock: false,
+        mystery: false
+      },
+      {
+        id: 3,
+        name: "Mystery Bargain Box",
+        category: "Mystery Box",
+        price: 20.00,
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80",
+        description: "A surprise box full of bargain goodies with amazing value inside.",
+        sale: false,
+        freeGift: false,
+        lowStock: true,
+        mystery: true
+      },
+      {
+        id: 4,
+        name: "Bluetooth Speaker Bargain",
+        category: "Electronics",
+        price: 24.99,
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80",
+        description: "Portable speaker with strong sound, perfect for home or garden.",
+        sale: false,
+        freeGift: false,
+        lowStock: false,
+        mystery: false
+      },
+      {
+        id: 5,
+        name: "£10 Mystery Box",
+        category: "Mystery Box",
+        price: 10.00,
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80",
+        description: "A fun low-cost mystery box packed with surprise value.",
+        sale: false,
+        freeGift: false,
+        lowStock: false,
+        mystery: true
+      },
+      {
+        id: 6,
+        name: "£50 Premium Mystery Box",
+        category: "Mystery Box",
+        price: 50.00,
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=900&q=80",
+        description: "Premium mystery box with larger value items and bonus extras.",
+        sale: false,
+        freeGift: true,
+        lowStock: false,
+        mystery: true
+      }
+    ];
+
+    let products = JSON.parse(localStorage.getItem("gottabargain_products")) || defaultProducts;
+    let basket = JSON.parse(localStorage.getItem("gottabargain_basket")) || [];
+    let editId = null;
+
+    function saveProductsToStorage() {
+      localStorage.setItem("gottabargain_products", JSON.stringify(products));
+    }
+
+    function saveBasketToStorage() {
+      localStorage.setItem("gottabargain_basket", JSON.stringify(basket));
+    }
+
+    function money(value) {
+      return Number(value).toFixed(2);
+    }
+
+    function renderProducts() {
+      const productGrid = document.getElementById("productGrid");
+      const mysteryGrid = document.getElementById("mysteryGrid");
+
+      productGrid.innerHTML = "";
+      mysteryGrid.innerHTML = "";
+
+      products.forEach(product => {
+        const card = createProductCard(product);
+
+        if (product.mystery) {
+          mysteryGrid.appendChild(card);
+        } else {
+          productGrid.appendChild(card);
+        }
+      });
+
+      renderAdminList();
+    }
+
+    function createProductCard(product) {
+      const div = document.createElement("div");
+      div.className = "card";
+
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <div class="card-content">
+          <h4>${product.name}</h4>
+          <div class="product-type">${product.category}</div>
+          <div class="price">
+            £${money(product.price)}
+            ${product.oldPrice ? `<span class="old-price">£${money(product.oldPrice)}</span>` : ""}
+          </div>
+          ${product.sale ? `<div class="sale-note">On Sale</div>` : ""}
+          ${product.freeGift ? `<div class="gift-note">FREE gift included</div>` : ""}
+          ${product.lowStock ? `<div class="stock-note">Popular item - limited quantity</div>` : ""}
+          <p>${product.description}</p>
+          <div class="button-row">
+            <button class="buy-btn" onclick="addToBasket(${product.id})">Add to Basket</button>
+            <button class="reserve-btn" onclick="reserveSingle('${product.name}')">Reserve with Deposit</button>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    function addToBasket(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      const existing = basket.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        basket.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          qty: 1
+        });
+      }
+
+      saveBasketToStorage();
+      renderBasket();
+      document.getElementById("basketDrawer").classList.add("open");
+    }
+
+    function renderBasket() {
+      const basketItems = document.getElementById("basketItems");
+      const basketCount = document.getElementById("basketCount");
+      const basketTotal = document.getElementById("basketTotal");
+
+      basketItems.innerHTML = "";
+
+      if (basket.length === 0) {
+        basketItems.innerHTML = `<p class="muted">Your basket is empty.</p>`;
+      } else {
+        basket.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "basket-item";
+          div.innerHTML = `
+            <div class="basket-item-title">${item.name}</div>
+            <div class="muted">£${money(item.price)} x ${item.qty}</div>
+            <div style="margin-top:8px; display:flex; gap:8px;">
+              <button class="small-btn" onclick="changeQty(${item.id}, 1)">+</button>
+              <button class="reserve-btn" onclick="changeQty(${item.id}, -1)">-</button>
+              <button class="danger-btn" onclick="removeFromBasket(${item.id})">Remove</button>
+            </div>
+          `;
+          basketItems.appendChild(div);
+        });
+      }
+
+      const count = basket.reduce((sum, item) => sum + item.qty, 0);
+      const total = basket.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+      basketCount.textContent = count;
+      basketTotal.textContent = money(total);
+    }
+
+    function changeQty(id, amount) {
+      const item = basket.find(i => i.id === id);
+      if (!item) return;
+
+      item.qty += amount;
+      if (item.qty <= 0) {
+        basket = basket.filter(i => i.id !== id);
+      }
+
+      saveBasketToStorage();
+      renderBasket();
+    }
+
+    function removeFromBasket(id) {
+      basket = basket.filter(item => item.id !== id);
+      saveBasketToStorage();
+      renderBasket();
+    }
+
+    function toggleBasket() {
+      document.getElementById("basketDrawer").classList.toggle("open");
+    }
+
+    function fakeCheckout() {
+      if (basket.length === 0) {
+        alert("Your basket is empty.");
+        return;
+      }
+      alert("Checkout button added. We can connect this to PayPal later.");
+    }
+
+    function reserveBasket() {
+      if (basket.length === 0) {
+        alert("Your basket is empty.");
+        return;
+      }
+      alert("Reserve with deposit selected. We can connect this to a proper form later.");
+    }
+
+    function reserveSingle(name) {
+      alert("Reserve request started for: " + name);
+    }
+
+    function showAdminLogin() {
+      const username = prompt("Enter admin username:");
+      if (username === null) return;
+
+      const password = prompt("Enter admin password:");
+      if (password === null) return;
+
+      if (username === "Admin2265" && password === "Harvey321!") {
+        document.getElementById("adminSection").classList.add("active");
+        window.location.href = "#adminSection";
+      } else {
+        alert("Incorrect admin login.");
+      }
+    }
+
+    function saveProduct() {
+      const name = document.getElementById("productName").value.trim();
+      const category = document.getElementById("productCategory").value.trim();
+      const price = parseFloat(document.getElementById("productPrice").value);
+      const oldPrice = document.getElementById("productOldPrice").value.trim();
+      const image = document.getElementById("productImage").value.trim();
+      const description = document.getElementById("productDescription").value.trim();
+      const sale = document.getElementById("productSale").checked;
+      const freeGift = document.getElementById("productGift").checked;
+      const lowStock = document.getElementById("productStock").checked;
+      const mystery = document.getElementById("productMystery").checked;
+
+      if (!name || !category || !price || !image || !description) {
+        alert("Please fill in the main product fields.");
+        return;
+      }
+
+      const productData = {
+        id: editId || Date.now(),
+        name,
+        category,
+        price,
+        oldPrice,
+        image,
+        description,
+        sale,
+        freeGift,
+        lowStock,
+        mystery
+      };
+
+      if (editId) {
+        products = products.map(p => p.id === editId ? productData : p);
+      } else {
+        products.unshift(productData);
+      }
+
+      saveProductsToStorage();
+      renderProducts();
+      resetForm();
+      document.getElementById("adminMessage").textContent = "Product saved successfully.";
+    }
+
+    function editProduct(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      editId = id;
+      document.getElementById("productName").value = product.name;
+      document.getElementById("productCategory").value = product.category;
+      document.getElementById("productPrice").value = product.price;
+      document.getElementById("productOldPrice").value = product.oldPrice;
+      document.getElementById("productImage").value = product.image;
+      document.getElementById("productDescription").value = product.description;
+      document.getElementById("productSale").checked = product.sale;
+      document.getElementById("productGift").checked = product.freeGift;
+      document.getElementById("productStock").checked = product.lowStock;
+      document.getElementById("productMystery").checked = product.mystery;
+      window.location.href = "#adminSection";
+      document.getElementById("adminMessage").textContent = "Editing product: " + product.name;
+    }
+
+    function deleteProduct(id) {
+      if (!confirm("Delete this product?")) return;
+      products = products.filter(p => p.id !== id);
+      saveProductsToStorage();
+      renderProducts();
+      document.getElementById("adminMessage").textContent = "Product deleted.";
+    }
+
+    function resetForm() {
+      editId = null;
+      document.getElementById("productName").value = "";
+      document.getElementById("productCategory").value = "";
+      document.getElementById("productPrice").value = "";
+      document.getElementById("productOldPrice").value = "";
+      document.getElementById("productImage").value = "";
+      document.getElementById("productDescription").value = "";
+      document.getElementById("productSale").checked = false;
+      document.getElementById("productGift").checked = false;
+      document.getElementById("productStock").checked = false;
+      document.getElementById("productMystery").checked = false;
+    }
+
+    function renderAdminList() {
+      const list = document.getElementById("adminProductList");
+      list.innerHTML = "";
+
+      products.forEach(product => {
+        const row = document.createElement("div");
+        row.style.padding = "12px 0";
+        row.style.borderBottom = "1px solid #eee";
+        row.innerHTML = `
+          <strong>${product.name}</strong><br>
+          <span class="muted">${product.category} - £${money(product.price)}</span>
+          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="small-btn" onclick="editProduct(${product.id})">Edit</button>
+            <button class="danger-btn" onclick="deleteProduct(${product.id})">Delete</button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    renderProducts();
+    renderBasket();
+  </script>
 </body>
 </html>
