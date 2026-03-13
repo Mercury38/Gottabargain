@@ -1,92 +1,505 @@
-export default function HomePage() {
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Kids Toy Bundle",
-      price: "£14.99",
-      oldPrice: "£19.99",
-      image: "https://via.placeholder.com/300x200",
-      sale: true,
-    },
-    {
-      id: 2,
-      name: "Diamond Painting Set",
-      price: "£7.99",
-      oldPrice: "",
-      image: "https://via.placeholder.com/300x200",
-      sale: false,
-    },
-    {
-      id: 3,
-      name: "Home Bargain Mystery Box",
-      price: "£12.99",
-      oldPrice: "£17.99",
-      image: "https://via.placeholder.com/300x200",
-      sale: true,
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gottabargain</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  return (
-    <main className="min-h-screen bg-white text-gray-900">
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 px-6 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Welcome to Gottabargain
-        </h1>
-        <p className="text-lg md:text-xl mb-4">
-          Great Products at Bargain Prices
-        </p>
-        <div className="inline-block bg-yellow-300 text-black font-semibold px-4 py-2 rounded-xl shadow">
-          Site still under construction — new products being added and updated daily
-        </div>
-      </section>
+    html {
+      scroll-behavior: smooth;
+    }
 
-      <section className="py-12 px-6 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Toys", "Home", "Gifts", "Special Offers"].map((category) => (
-            <button
-              key={category}
-              className="bg-gray-100 hover:bg-gray-200 rounded-2xl p-6 shadow text-lg font-semibold transition"
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </section>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.4;
+    }
 
-      <section className="py-12 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Featured Products</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-md overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-56 object-cover"
-                />
-                <div className="p-5">
-                  {product.sale && (
-                    <span className="inline-block bg-red-500 text-white text-sm px-3 py-1 rounded-full mb-3">
-                      On Sale
-                    </span>
-                  )}
-                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl font-bold text-green-600">{product.price}</span>
-                    {product.oldPrice && (
-                      <span className="text-gray-400 line-through">{product.oldPrice}</span>
-                    )}
-                  </div>
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition">
-                    Add to Basket
-                  </button>
-                </div>
-              </div>
-            ))}
+    header {
+      background: linear-gradient(90deg, #111, #1f1f1f);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      color: #00ffd0;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #ddd;
+    }
+
+    nav {
+      background: #00ffd0;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #111;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    .hero {
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .hero button {
+      background: #00ffd0;
+      color: #111;
+      border: none;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .hero .secondary-btn {
+      background: white;
+      color: #111;
+    }
+
+    .banner {
+      background: #fff3cd;
+      color: #7a5a00;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      border-top: 1px solid #f0df9b;
+      border-bottom: 1px solid #f0df9b;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+
+    .products,
+    .features,
+    .categories,
+    .contact-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .products {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .features {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .categories {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card,
+    .feature-box,
+    .category-box,
+    .contact-box {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .card {
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 18px;
+    }
+
+    .card h4 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #00a884;
+      margin-bottom: 10px;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 15px;
+      margin-left: 8px;
+    }
+
+    .card p {
+      font-size: 15px;
+      margin-bottom: 14px;
+      color: #555;
+    }
+
+    .gift-note {
+      background: #ecfff9;
+      color: #00805f;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .stock-note {
+      background: #fff4e5;
+      color: #9a5a00;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .card button,
+    .category-box button {
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .buy-btn {
+      background: #111;
+      color: white;
+    }
+
+    .reserve-btn {
+      background: #00ffd0;
+      color: #111;
+    }
+
+    .feature-box,
+    .category-box,
+    .contact-box {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .feature-box h4,
+    .category-box h4,
+    .contact-box h4 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px 20px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 6px 0;
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 34px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      nav a {
+        margin: 8px 10px;
+        font-size: 14px;
+      }
+
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="home">
+    <h1>Gottabargain</h1>
+    <p>Great Products at Bargain Prices</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#mystery">Mystery Boxes</a>
+    <a href="#offers">Special Offers</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Welcome to Gottabargain</h2>
+    <p>Find amazing bargains, mystery boxes, gifts and special deals</p>
+    <div class="hero-buttons">
+      <button onclick="document.getElementById('shop').scrollIntoView();">Shop Now</button>
+      <button class="secondary-btn" onclick="document.getElementById('mystery').scrollIntoView();">View Mystery Boxes</button>
+    </div>
+  </section>
+
+  <div class="banner">
+    🚧 Site still under construction - new products are being added and updated daily 🚧
+  </div>
+
+  <section class="section" id="shop">
+    <h3>Featured Bargains</h3>
+    <div class="products">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80" alt="DJ Headphones">
+        <div class="card-content">
+          <h4>Retro DJ Headphones</h4>
+          <div class="price">£19.99 <span class="old-price">£29.99</span></div>
+          <div class="gift-note">FREE gift included: Mini craft set</div>
+          <p>Brilliant sound and a great bargain for music lovers and DJs.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve with Deposit</button>
           </div>
         </div>
-      </section>
-    </main>
-  );
-}
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80" alt="Toy Bundle">
+        <div class="card-content">
+          <h4>Kids Surprise Toy Bundle</h4>
+          <div class="price">£14.99</div>
+          <p>A fun toy bundle packed with value and surprises for children.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve with Deposit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80" alt="Mystery Box">
+        <div class="card-content">
+          <h4>Mystery Bargain Box</h4>
+          <div class="price">£20.00</div>
+          <div class="stock-note">Popular item - limited quantity</div>
+          <p>A surprise box full of bargain goodies with amazing value inside.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve with Deposit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80" alt="Bluetooth Speaker">
+        <div class="card-content">
+          <h4>Bluetooth Speaker Bargain</h4>
+          <div class="price">£24.99</div>
+          <p>Portable speaker with strong sound, perfect for home or garden.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve with Deposit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h3>Shop by Category</h3>
+    <div class="categories">
+      <div class="category-box">
+        <h4>Toys</h4>
+        <p>Fun bargain toys and bundles for children.</p>
+        <button class="reserve-btn">View Category</button>
+      </div>
+      <div class="category-box">
+        <h4>Home Bargains</h4>
+        <p>Useful everyday products at bargain prices.</p>
+        <button class="reserve-btn">View Category</button>
+      </div>
+      <div class="category-box">
+        <h4>Gifts</h4>
+        <p>Budget-friendly gift ideas and surprise buys.</p>
+        <button class="reserve-btn">View Category</button>
+      </div>
+      <div class="category-box">
+        <h4>Special Offers</h4>
+        <p>Sale items, free gift deals and limited offers.</p>
+        <button class="reserve-btn">View Category</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mystery">
+    <h3>Mystery Boxes</h3>
+    <div class="products">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="£10 Mystery Box">
+        <div class="card-content">
+          <h4>£10 Mystery Box</h4>
+          <div class="price">£10.00</div>
+          <p>A fun low-cost mystery box packed with surprise value.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80" alt="£20 Mystery Box">
+        <div class="card-content">
+          <h4>£20 Mystery Box</h4>
+          <div class="price">£20.00</div>
+          <p>Our most popular mystery box with even better value inside.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=900&q=80" alt="£50 Premium Mystery Box">
+        <div class="card-content">
+          <h4>£50 Premium Mystery Box</h4>
+          <div class="price">£50.00</div>
+          <div class="gift-note">Bonus gift included</div>
+          <p>Premium mystery box with larger value items and bonus extras.</p>
+          <div class="button-row">
+            <button class="buy-btn">Add to Basket</button>
+            <button class="reserve-btn">Reserve</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="offers">
+    <h3>Why Shop With Us?</h3>
+    <div class="features">
+      <div class="feature-box">
+        <h4>Great Bargains</h4>
+        <p>We focus on finding great products at low prices.</p>
+      </div>
+      <div class="feature-box">
+        <h4>Mystery Boxes</h4>
+        <p>Exciting surprise boxes packed with value and fun extras.</p>
+      </div>
+      <div class="feature-box">
+        <h4>Special Offers</h4>
+        <p>Selected items can include bonus gifts and sale prices.</p>
+      </div>
+      <div class="feature-box">
+        <h4>Reserve with Deposit</h4>
+        <p>Let customers reserve selected items before full payment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h3>Contact Gottabargain</h3>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h4>Email</h4>
+        <p>hello@gottabargain.co.uk</p>
+      </div>
+      <div class="contact-box">
+        <h4>Phone</h4>
+        <p>07400 000000</p>
+      </div>
+      <div class="contact-box">
+        <h4>Collection</h4>
+        <p>Reserve items and collect locally</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Gottabargain</h3>
+    <p>Great Products at Bargain Prices</p>
+    <p>More products coming soon</p>
+  </footer>
+
+</body>
+</html>
