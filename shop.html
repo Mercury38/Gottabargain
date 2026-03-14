@@ -102,17 +102,42 @@
     }
 
     textarea {
-      min-height: 90px;
+      min-height: 110px;
       resize: vertical;
     }
 
-    .products {
+    .products,
+    .summary-grid,
+    .contact-grid,
+    .mystery-grid,
+    .review-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
       gap: 20px;
     }
 
-    .card, .admin-box, .contact-box, .summary-box {
+    .products {
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 28px;
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .mystery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .review-list {
+      grid-template-columns: 1fr;
+      margin-top: 18px;
+    }
+
+    .card, .admin-box, .contact-box, .summary-box, .mystery-box, .reward-box, .review-card {
       background: white;
       border-radius: 14px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
@@ -123,7 +148,8 @@
       transition: transform 0.2s ease;
     }
 
-    .card:hover {
+    .card:hover,
+    .mystery-box:hover {
       transform: translateY(-4px);
     }
 
@@ -135,11 +161,19 @@
       background: #eee;
     }
 
-    .card-content {
-      padding: 18px;
+    .card-content,
+    .mystery-box,
+    .summary-box,
+    .contact-box,
+    .admin-box,
+    .reward-box,
+    .review-card {
+      padding: 22px;
     }
 
-    .card h4 {
+    .card h4,
+    .mystery-box h3,
+    .review-card h4 {
       font-size: 20px;
       margin-bottom: 8px;
     }
@@ -150,7 +184,8 @@
       margin-bottom: 8px;
     }
 
-    .price {
+    .price,
+    .mystery-price {
       font-size: 22px;
       color: #00a884;
       font-weight: bold;
@@ -165,13 +200,16 @@
       font-weight: normal;
     }
 
-    .card p {
+    .card p,
+    .mystery-box p,
+    .review-card p {
       color: #555;
       font-size: 15px;
       margin-bottom: 12px;
+      white-space: pre-wrap;
     }
 
-    .gift-note, .stock-note, .sale-note {
+    .gift-note, .stock-note, .sale-note, .mystery-note, .finance-note, .drop-note {
       padding: 10px;
       border-radius: 8px;
       margin-bottom: 10px;
@@ -192,6 +230,22 @@
     .sale-note {
       background: #ffe9ee;
       color: #c90036;
+    }
+
+    .mystery-note {
+      background: #eef5ff;
+      color: #2457a6;
+    }
+
+    .finance-note {
+      background: #f4f0ff;
+      color: #5b31b5;
+    }
+
+    .drop-note {
+      background: #eefbf7;
+      color: #12795b;
+      text-align: center;
     }
 
     .button-row {
@@ -315,11 +369,13 @@
       font-size: 14px;
     }
 
-    .admin-panel {
+    .admin-panel,
+    .finance-panel {
       display: none;
     }
 
-    .admin-panel.active {
+    .admin-panel.active,
+    .finance-panel.active {
       display: block;
     }
 
@@ -330,11 +386,8 @@
       align-items: start;
     }
 
-    .admin-box {
-      padding: 24px;
-    }
-
-    .admin-box h3 {
+    .admin-box h3,
+    .reward-box h3 {
       margin-bottom: 16px;
       font-size: 24px;
     }
@@ -403,15 +456,7 @@
       flex-wrap: wrap;
     }
 
-    .summary-grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-bottom: 28px;
-    }
-
     .summary-box {
-      padding: 22px;
       text-align: center;
     }
 
@@ -425,20 +470,51 @@
       color: #00a884;
     }
 
-    .contact-grid {
+    .reward-result {
+      margin-top: 14px;
+      padding: 14px;
+      background: #f5fbff;
+      border: 1px solid #d9ebff;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #2457a6;
+      min-height: 52px;
+    }
+
+    .upload-zone {
+      border: 2px dashed #00a884;
+      border-radius: 12px;
+      padding: 20px;
+      background: #f8fffd;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .upload-zone.dragover {
+      background: #e8fff7;
+      border-color: #007b5d;
+    }
+
+    .image-preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .financial-grid {
       display: grid;
       gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 20px;
     }
 
-    .contact-box {
-      padding: 24px;
-      text-align: center;
-    }
-
-    .contact-box h4 {
-      margin-bottom: 10px;
-      font-size: 20px;
+    .review-author {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 8px;
     }
 
     footer {
@@ -465,9 +541,7 @@
       nav a, nav button { margin: 6px 8px; font-size: 14px; }
       .button-row { grid-template-columns: 1fr; }
       .basket-drawer { width: 100%; }
-      .toolbar {
-        grid-template-columns: 1fr;
-      }
+      .toolbar { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -484,6 +558,7 @@
     <a href="#mystery">Mystery Boxes</a>
     <a href="#contact">Contact</a>
     <button onclick="showAdminLogin()">Admin Login</button>
+    <button onclick="showFinanceLogin()">Finance Login</button>
   </nav>
 
   <div class="top-banner">
@@ -534,7 +609,49 @@
   <section class="section" id="mystery">
     <h2>Mystery Boxes</h2>
     <p class="subtext">Choose a surprise bundle and enjoy the fun of not knowing exactly what is inside.</p>
-    <div class="products" id="mysteryGrid"></div>
+
+    <div class="mystery-grid">
+      <div class="mystery-box">
+        <h3>£10 Mystery Box</h3>
+        <div class="mystery-price">£10.00</div>
+        <div class="mystery-note">Budget-friendly surprise box</div>
+        <p>Perfect for fun bargain hunting and smaller surprise bundles.</p>
+        <div class="button-row">
+          <button class="buy-btn" onclick="addSpecialMysteryBox('£10 Mystery Box', 10)">Add to Basket</button>
+          <button class="reserve-btn" onclick="generateMysteryReward('£10 Mystery Box')">Generate Reward</button>
+        </div>
+      </div>
+
+      <div class="mystery-box">
+        <h3>£20 Mystery Box</h3>
+        <div class="mystery-price">£20.00</div>
+        <div class="mystery-note">Most popular choice</div>
+        <p>A bigger mystery box with more value and more exciting surprise combinations.</p>
+        <div class="button-row">
+          <button class="buy-btn" onclick="addSpecialMysteryBox('£20 Mystery Box', 20)">Add to Basket</button>
+          <button class="reserve-btn" onclick="generateMysteryReward('£20 Mystery Box')">Generate Reward</button>
+        </div>
+      </div>
+
+      <div class="mystery-box">
+        <h3>£50 Premium Mystery Box</h3>
+        <div class="mystery-price">£50.00</div>
+        <div class="gift-note">Bonus gift included</div>
+        <p>Premium surprise bundle with larger value items and special extras.</p>
+        <div class="button-row">
+          <button class="buy-btn" onclick="addSpecialMysteryBox('£50 Premium Mystery Box', 50)">Add to Basket</button>
+          <button class="reserve-btn" onclick="generateMysteryReward('£50 Premium Mystery Box')">Generate Reward</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="reward-box" style="margin-top: 20px;">
+      <h3>Mystery Reward Generator</h3>
+      <p class="muted">Click any mystery reward button above to reveal a surprise bonus for that mystery box.</p>
+      <div class="reward-result" id="rewardResult">No mystery reward generated yet.</div>
+    </div>
+
+    <div class="products" id="mysteryGrid" style="margin-top: 24px;"></div>
   </section>
 
   <section class="section admin-panel" id="adminSection">
@@ -545,13 +662,21 @@
       <div class="admin-box">
         <h3>Add or Edit Product</h3>
 
+        <div class="upload-zone" id="uploadZone">
+          <div class="drop-note">Drag and drop a product image here, or use the file picker below.</div>
+          <input type="file" id="productImageFile" accept="image/*" onchange="handleImageFile(event)" />
+          <img id="imagePreview" class="image-preview" alt="Preview" />
+        </div>
+
         <div class="form-grid">
           <input id="productName" placeholder="Product name" />
           <input id="productCategory" placeholder="Category" />
-          <input id="productPrice" placeholder="Price e.g. 19.99" />
+          <input id="productPrice" placeholder="Selling price e.g. 19.99" />
           <input id="productOldPrice" placeholder="Old price e.g. 29.99" />
-          <input id="productImage" class="full-width" placeholder="Image URL" />
+          <input id="productCostPrice" placeholder="Cost price e.g. 9.50" />
+          <input id="productImage" class="full-width" placeholder="Image URL or drag and drop image above" />
           <textarea id="productDescription" class="full-width" placeholder="Description"></textarea>
+          <textarea id="productReviews" class="full-width" placeholder="Paste one or more reviews here. Separate reviews with a blank line."></textarea>
         </div>
 
         <div class="checkbox-row">
@@ -574,6 +699,38 @@
         <div id="adminProductList"></div>
       </div>
     </div>
+  </section>
+
+  <section class="section finance-panel" id="financeSection">
+    <h2>Finance Panel</h2>
+    <p class="subtext">Protected financial view for cost prices and estimated profit.</p>
+
+    <div class="financial-grid">
+      <div class="summary-box">
+        <h4>Total Estimated Profit</h4>
+        <strong id="summaryProfit">£0.00</strong>
+      </div>
+      <div class="summary-box">
+        <h4>Total Cost Value</h4>
+        <strong id="summaryCost">£0.00</strong>
+      </div>
+      <div class="summary-box">
+        <h4>Total Sale Value</h4>
+        <strong id="summarySaleValue">£0.00</strong>
+      </div>
+    </div>
+
+    <div class="admin-box">
+      <h3>Product Cost & Profit</h3>
+      <div class="finance-note">This section is locked behind a separate finance password.</div>
+      <div id="financeProductList"></div>
+    </div>
+  </section>
+
+  <section class="section" id="reviewsSection">
+    <h2>Customer Reviews</h2>
+    <p class="subtext">Reviews pasted into products will appear here automatically.</p>
+    <div class="review-list" id="reviewList"></div>
   </section>
 
   <section class="section" id="contact">
@@ -620,6 +777,10 @@
   </div>
 
   <script>
+    const ADMIN_USERNAME = "Admin2265";
+    const ADMIN_PASSWORD = "Harvey321!";
+    const FINANCE_PASSWORD = "Finance2265!";
+
     const defaultProducts = [
       {
         id: 1,
@@ -627,8 +788,10 @@
         category: "DJ / Electronics",
         price: 19.99,
         oldPrice: 29.99,
+        costPrice: 9.50,
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
         description: "Brilliant sound and a great bargain for music lovers and DJs.",
+        reviews: "Really impressed with the sound for the money.\n\nGreat value and fast delivery.",
         sale: true,
         freeGift: true,
         lowStock: false,
@@ -640,8 +803,10 @@
         category: "Toys",
         price: 14.99,
         oldPrice: "",
+        costPrice: 6.00,
         image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80",
         description: "A fun toy bundle packed with value and surprises for children.",
+        reviews: "My little one loved this bundle.\n\nExcellent bargain for the price.",
         sale: false,
         freeGift: false,
         lowStock: false,
@@ -653,8 +818,10 @@
         category: "Electronics",
         price: 24.99,
         oldPrice: "",
+        costPrice: 13.25,
         image: "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80",
         description: "Portable speaker with strong sound, perfect for home or garden.",
+        reviews: "Very loud for such a small speaker.",
         sale: false,
         freeGift: false,
         lowStock: false,
@@ -666,8 +833,10 @@
         category: "Mystery Box",
         price: 20.00,
         oldPrice: "",
+        costPrice: 11.00,
         image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0ea?auto=format&fit=crop&w=900&q=80",
         description: "A surprise box full of bargain goodies with amazing value inside.",
+        reviews: "Loved the surprise items inside.\n\nWill definitely order another one.",
         sale: false,
         freeGift: false,
         lowStock: true,
@@ -679,8 +848,10 @@
         category: "Mystery Box",
         price: 10.00,
         oldPrice: "",
+        costPrice: 5.50,
         image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80",
         description: "A fun low-cost mystery box packed with surprise value.",
+        reviews: "Great little mystery box and worth the money.",
         sale: false,
         freeGift: false,
         lowStock: false,
@@ -692,13 +863,26 @@
         category: "Mystery Box",
         price: 50.00,
         oldPrice: "",
+        costPrice: 28.00,
         image: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=900&q=80",
-        description: "Premium mystery box with larger value items and bonus extras.",
+        description: "Premium surprise bundle with larger value items and bonus extras.",
+        reviews: "Fantastic value and some brilliant surprise products.",
         sale: false,
         freeGift: true,
         lowStock: false,
         mystery: true
       }
+    ];
+
+    const mysteryRewards = [
+      "Free mini craft kit included",
+      "Bonus surprise item added",
+      "10% off your next order",
+      "Free gift upgrade applied",
+      "Lucky premium mystery extra added",
+      "Reserve priority on your next order",
+      "Mystery bonus value pack included",
+      "Special freebie added to your box"
     ];
 
     let products = JSON.parse(localStorage.getItem("gottabargain_products")) || defaultProducts;
@@ -714,7 +898,7 @@
     }
 
     function money(value) {
-      return Number(value).toFixed(2);
+      return Number(value || 0).toFixed(2);
     }
 
     function updateSummary() {
@@ -722,27 +906,45 @@
       const mysteryProducts = products.filter(p => p.mystery).length;
       const basketItems = basket.reduce((sum, item) => sum + item.qty, 0);
       const offers = products.filter(p => p.sale || p.freeGift).length;
+      const totalProfit = products.reduce((sum, p) => sum + ((Number(p.price) || 0) - (Number(p.costPrice) || 0)), 0);
+      const totalCost = products.reduce((sum, p) => sum + (Number(p.costPrice) || 0), 0);
+      const totalSaleValue = products.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
 
       document.getElementById("summaryProducts").textContent = normalProducts;
       document.getElementById("summaryMystery").textContent = mysteryProducts;
       document.getElementById("summaryBasket").textContent = basketItems;
       document.getElementById("summaryOffers").textContent = offers;
+      document.getElementById("summaryProfit").textContent = "£" + money(totalProfit);
+      document.getElementById("summaryCost").textContent = "£" + money(totalCost);
+      document.getElementById("summarySaleValue").textContent = "£" + money(totalSaleValue);
+    }
+
+    function parseReviews(text) {
+      if (!text) return [];
+      return text
+        .split(/\n\s*\n/)
+        .map(r => r.trim())
+        .filter(Boolean);
     }
 
     function renderProducts() {
       const productGrid = document.getElementById("productGrid");
       const mysteryGrid = document.getElementById("mysteryGrid");
+      const reviewList = document.getElementById("reviewList");
       const searchTerm = document.getElementById("searchBox").value.toLowerCase().trim();
       const categoryFilter = document.getElementById("categoryFilter").value;
 
       productGrid.innerHTML = "";
       mysteryGrid.innerHTML = "";
+      reviewList.innerHTML = "";
 
       const filteredProducts = products.filter(product => {
+        const reviewText = Array.isArray(product.reviews) ? product.reviews.join(" ") : (product.reviews || "");
         const matchesSearch =
           product.name.toLowerCase().includes(searchTerm) ||
           product.category.toLowerCase().includes(searchTerm) ||
-          product.description.toLowerCase().includes(searchTerm);
+          product.description.toLowerCase().includes(searchTerm) ||
+          reviewText.toLowerCase().includes(searchTerm);
 
         const matchesCategory =
           categoryFilter === "all" || product.category === categoryFilter;
@@ -759,7 +961,26 @@
         }
       });
 
+      products.forEach(product => {
+        const reviews = parseReviews(product.reviews);
+        reviews.forEach((review, index) => {
+          const card = document.createElement("div");
+          card.className = "review-card";
+          card.innerHTML = `
+            <h4>${product.name}</h4>
+            <div class="review-author">Review ${index + 1}</div>
+            <p>${review}</p>
+          `;
+          reviewList.appendChild(card);
+        });
+      });
+
+      if (!reviewList.innerHTML.trim()) {
+        reviewList.innerHTML = `<div class="review-card"><p>No reviews added yet.</p></div>`;
+      }
+
       renderAdminList();
+      renderFinanceList();
       updateSummary();
     }
 
@@ -811,6 +1032,30 @@
       document.getElementById("basketDrawer").classList.add("open");
     }
 
+    function addSpecialMysteryBox(name, price) {
+      const existing = basket.find(item => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        basket.push({
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          name: name,
+          price: price,
+          qty: 1
+        });
+      }
+
+      saveBasketToStorage();
+      renderBasket();
+      updateSummary();
+      document.getElementById("basketDrawer").classList.add("open");
+    }
+
+    function generateMysteryReward(boxName) {
+      const reward = mysteryRewards[Math.floor(Math.random() * mysteryRewards.length)];
+      document.getElementById("rewardResult").textContent = boxName + ": " + reward;
+    }
+
     function renderBasket() {
       const basketItems = document.getElementById("basketItems");
       const basketCount = document.getElementById("basketCount");
@@ -822,11 +1067,13 @@
         basketItems.innerHTML = `<p class="muted">Your basket is empty.</p>`;
       } else {
         basket.forEach(item => {
+          const isMystery = item.name.toLowerCase().includes("mystery");
           const div = document.createElement("div");
           div.className = "basket-item";
           div.innerHTML = `
             <div class="basket-item-title">${item.name}</div>
             <div class="muted">£${money(item.price)} x ${item.qty}</div>
+            ${isMystery ? `<div class="mystery-note" style="margin-top:8px;">Mystery box item</div>` : ""}
             <div style="margin-top:8px; display:flex; gap:8px;">
               <button class="small-btn" onclick="changeQty(${item.id}, 1)">+</button>
               <button class="reserve-btn" onclick="changeQty(${item.id}, -1)">-</button>
@@ -903,11 +1150,23 @@
       const password = prompt("Enter admin password:");
       if (password === null) return;
 
-      if (username === "Admin2265" && password === "Harvey321!") {
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
         document.getElementById("adminSection").classList.add("active");
         window.location.href = "#adminSection";
       } else {
         alert("Incorrect admin login.");
+      }
+    }
+
+    function showFinanceLogin() {
+      const password = prompt("Enter finance password:");
+      if (password === null) return;
+
+      if (password === FINANCE_PASSWORD) {
+        document.getElementById("financeSection").classList.add("active");
+        window.location.href = "#financeSection";
+      } else {
+        alert("Incorrect finance password.");
       }
     }
 
@@ -916,8 +1175,10 @@
       const category = document.getElementById("productCategory").value.trim();
       const price = parseFloat(document.getElementById("productPrice").value);
       const oldPrice = document.getElementById("productOldPrice").value.trim();
+      const costPrice = parseFloat(document.getElementById("productCostPrice").value || 0);
       const image = document.getElementById("productImage").value.trim();
       const description = document.getElementById("productDescription").value.trim();
+      const reviews = document.getElementById("productReviews").value.trim();
       const sale = document.getElementById("productSale").checked;
       const freeGift = document.getElementById("productGift").checked;
       const lowStock = document.getElementById("productStock").checked;
@@ -934,8 +1195,10 @@
         category,
         price,
         oldPrice,
+        costPrice,
         image,
         description,
+        reviews,
         sale,
         freeGift,
         lowStock,
@@ -963,12 +1226,15 @@
       document.getElementById("productCategory").value = product.category;
       document.getElementById("productPrice").value = product.price;
       document.getElementById("productOldPrice").value = product.oldPrice;
+      document.getElementById("productCostPrice").value = product.costPrice || "";
       document.getElementById("productImage").value = product.image;
       document.getElementById("productDescription").value = product.description;
+      document.getElementById("productReviews").value = product.reviews || "";
       document.getElementById("productSale").checked = product.sale;
       document.getElementById("productGift").checked = product.freeGift;
       document.getElementById("productStock").checked = product.lowStock;
       document.getElementById("productMystery").checked = product.mystery;
+      setImagePreview(product.image);
       window.location.href = "#adminSection";
       document.getElementById("adminMessage").textContent = "Editing product: " + product.name;
     }
@@ -987,12 +1253,16 @@
       document.getElementById("productCategory").value = "";
       document.getElementById("productPrice").value = "";
       document.getElementById("productOldPrice").value = "";
+      document.getElementById("productCostPrice").value = "";
       document.getElementById("productImage").value = "";
       document.getElementById("productDescription").value = "";
+      document.getElementById("productReviews").value = "";
       document.getElementById("productSale").checked = false;
       document.getElementById("productGift").checked = false;
       document.getElementById("productStock").checked = false;
       document.getElementById("productMystery").checked = false;
+      setImagePreview("");
+      document.getElementById("productImageFile").value = "";
     }
 
     function renderAdminList() {
@@ -1013,6 +1283,71 @@
         list.appendChild(row);
       });
     }
+
+    function renderFinanceList() {
+      const list = document.getElementById("financeProductList");
+      list.innerHTML = "";
+
+      products.forEach(product => {
+        const profit = (Number(product.price) || 0) - (Number(product.costPrice) || 0);
+        const row = document.createElement("div");
+        row.className = "manage-row";
+        row.innerHTML = `
+          <div class="manage-title">${product.name}</div>
+          <div class="manage-meta">Selling price: £${money(product.price)} | Cost price: £${money(product.costPrice)} | Estimated profit: £${money(profit)}</div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function handleImageFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      readImageFile(file);
+    }
+
+    function readImageFile(file) {
+      if (!file.type.startsWith("image/")) {
+        alert("Please drop or select an image file only.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageData = e.target.result;
+        document.getElementById("productImage").value = imageData;
+        setImagePreview(imageData);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setImagePreview(src) {
+      const preview = document.getElementById("imagePreview");
+      if (src) {
+        preview.src = src;
+        preview.style.display = "block";
+      } else {
+        preview.src = "";
+        preview.style.display = "none";
+      }
+    }
+
+    const uploadZone = document.getElementById("uploadZone");
+    uploadZone.addEventListener("dragover", function(e) {
+      e.preventDefault();
+      uploadZone.classList.add("dragover");
+    });
+
+    uploadZone.addEventListener("dragleave", function() {
+      uploadZone.classList.remove("dragover");
+    });
+
+    uploadZone.addEventListener("drop", function(e) {
+      e.preventDefault();
+      uploadZone.classList.remove("dragover");
+      const file = e.dataTransfer.files[0];
+      if (file) readImageFile(file);
+    });
 
     renderProducts();
     renderBasket();
